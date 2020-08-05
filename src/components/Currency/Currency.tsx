@@ -20,9 +20,15 @@ const Currency = ({
   );
 
   useEffect(() => {
-    if (item.id) {
-      fetchTicker(item.id);
-    }
+    const delay = setTimeout(() => {
+      if (item.id) {
+        fetchTicker(item.id);
+      }
+    }, 1000);
+
+    return () => {
+      clearTimeout(delay);
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [item]);
 
