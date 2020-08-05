@@ -1,5 +1,7 @@
-import {getTicker} from '../utilities/getCurrencies';
 import {pathOr} from 'ramda';
+
+import {getTicker} from '../utilities/getCurrencies';
+import {sleep} from '../utilities/sleep';
 
 const currencies = {
   state: {
@@ -45,18 +47,22 @@ const currencies = {
     async fetchTicker(payload: any, rootState: any) {
       const itemExists = pathOr(
         undefined,
-        ['items', payload, 'data'],
+        ['currencies', 'items', payload, 'data'],
         rootState,
       );
 
       if (!itemExists) {
         dispatch.currencies.fetchTickerStart(payload);
 
-        const data = await getTicker(payload);
-        if (data.error) {
-          dispatch.currencies.fetchTickerError(payload);
-        } else {
-          dispatch.currencies.fetchTickerSuccess({id: payload, data});
+        let data = {error: 'Not started yet'};
+        while (data.error) {
+          data = await getTicker(payload);
+          if (data.error) {
+            dispatch.currencies.fetchTickerError(payload);
+            await sleep(1000);
+          } else {
+            dispatch.currencies.fetchTickerSuccess({id: payload, data});
+          }
         }
       }
     },

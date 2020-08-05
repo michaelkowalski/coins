@@ -1,6 +1,7 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import {Text} from 'react-native';
 import {useSelector} from 'react-redux';
+
 import {useRematchDispatch} from '../../utilities/useRematchDispatch';
 
 const Currency = ({
@@ -20,7 +21,6 @@ const Currency = ({
 
   useEffect(() => {
     if (item.id) {
-      console.log('Will fetch for', item.id);
       fetchTicker(item.id);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
