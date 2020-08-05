@@ -4,7 +4,7 @@ import {RecyclerListView, DataProvider, LayoutProvider} from 'recyclerlistview';
 
 import Currency from '../../components/Currency/Currency';
 
-import getCurrencies from '../../../src/utilities/getCurrencies';
+import {getCurrencies} from '../../utilities/getCurrencies';
 
 const ViewTypes = {DEFAULT: 0};
 

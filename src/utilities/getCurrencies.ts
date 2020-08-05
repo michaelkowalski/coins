@@ -1,7 +1,7 @@
 const CoinpaprikaAPI = require('@coinpaprika/api-nodejs-client');
 const client = new CoinpaprikaAPI();
 
-const getCurrencies: () => Promise<any> = async () =>
+export const getCurrencies: () => Promise<any> = async () =>
   new Promise((resolve) => {
     client
       .getCoins()
@@ -12,4 +12,13 @@ const getCurrencies: () => Promise<any> = async () =>
       });
   });
 
-export default getCurrencies;
+export const getTicker: (coinId: string) => Promise<any> = async (coinId) =>
+  new Promise((resolve) => {
+    client
+      .getTicker({coinId})
+      .then((coins: []) => resolve(coins))
+      .catch((e: {message: any}) => {
+        console.log(`Error: ${e.message}`);
+        resolve([]);
+      });
+  });
