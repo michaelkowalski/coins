@@ -11,8 +11,13 @@
   },
   "dependencies": {
     "@coinpaprika/api-nodejs-client": "^1.2.0",
+    "@rematch/core": "^1.4.0",
+    "@types/ramda": "^0.27.14",
+    "@types/react-redux": "^7.1.9",
+    "ramda": "^0.27.1",
     "react": "16.13.1",
     "react-native": "0.63.2",
+    "react-redux": "^7.2.1",
     "recyclerlistview": "^3.0.0"
   },
   "devDependencies": {
